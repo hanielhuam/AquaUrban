@@ -1,0 +1,74 @@
+#body {
+
+	background-color: rgb(76, 122, 168);
+
+	font-family: "Times New Roman";
+}
+
+#mainHeader {
+
+	background-color: rgb(26, 72, 118);
+}
+
+	#mainHeader .col {
+
+		background-color: rgb(255, 255, 255);
+	}
+
+	#mainHeader #mainTitle {
+
+		font-size: 50px;
+
+		color: rgb(255, 255, 255);
+
+		text-align: center;
+	}
+
+	#mainHeader #mainTitleFolder {
+
+		height: 120px;
+
+		background-color: rgb(0, 0, 0);
+	}
+
+	#mainHeader #mainDescription {
+
+		padding: 50px 0px;
+
+		font-size: 30px;
+
+		color: rgb(0, 0, 0);
+
+		text-align: center;
+	}
+
+	#mainHeader #mainDescriptionFolder {
+
+		height: 120px;
+
+		background-image: url(../_image-source/main-description-folder.jpg);
+	}
+
+	#mainHeader #menu {
+
+		background-color: rgb(0, 0, 0);
+	}
+
+		#mainHeader #menu div{
+
+			background-color: rgb(0, 0, 0);
+		}
+
+		#mainHeader #menu a {
+
+			text-decoration: none;
+		}
+
+		#mainHeader #menu p {
+
+			color: rgb(255, 255, 255);
+
+			font-size: 20px;
+
+			text-align: center;
+		}

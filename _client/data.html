@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+	<head>
+
+		<title>Urban Aquaponics</title>
+
+		<!--BASIC JS/CSS FILES-->
+
+		<link rel="stylesheet" type="text/css" href="../../common-grid.css"/>
+
+		<link rel="stylesheet" type="text/css" href="../../reset.css"/>
+
+		<link rel="stylesheet" type="text/css" href="../../normalize.css"/>
+
+		<link rel="stylesheet" type="text/css" href="_css/head.css"/>
+
+		<link rel="stylesheet" type="text/css" href="_css/data.css"/>
+
+		<script type="text/javascript" src="_javascript/jquery-3.1.0.js"></script>
+
+		<script type="text/javascript" src="_javascript/data.js"></script>
+
+		<meta charset="utf-8"/>
+	</head>
+
+	<body id="body">
+
+		<header>
+
+			<div class="linefolder" id="mainHeader">
+				
+				<div class="line">
+					
+					<div class="col size4" id="mainTitleFolder">
+						
+						<h1 id="mainTitle">Aqua Urban</h1>
+					</div>
+
+					<div class="col size8" id="mainDescriptionFolder">
+						
+						<h2 id="mainDescription">Create your own Production of fish and vegetables</h2>
+					</div>
+				</div>
+
+				<div class="line" id="menu">
+
+					<nav>
+
+						<div class="col size4">
+							
+							<a href="index.html"><p>About Us</p></a>
+						</div>
+
+						<div class="col size4">
+
+							<a href="data.html"><p>System Data</p></a>
+						</div>
+
+						<div class="col size4">
+
+							<a href="settings.html"><p>Settings</p></a>
+						</div>
+					</nav>
+				</div>
+			</div>
+		</header>
+
+		<div class="linefolder highFrame" id="dataFrame">
+
+			<div class="line">
+
+				<form class="measureFolderForm" id="temperature">
+				
+					<div class="col size4 mainMeasureFolder">	
+
+						<div class="col size4 measureFolder">
+
+							<input type="text" name="frame" disabled="disabled" id="temperatureFrame"/>
+
+							<label for="temperatureFrame">Cº</label>
+						</div>
+
+						<div class="col size4 measureFolder">
+
+							<input type="submit" name="button" value="show"/>
+						</div>
+					</div>
+				</form>
+
+				<form class="measureFolderForm" id="ph">
+
+					<div class="col size4 mainMeasureFolder">	
+
+						<div class="col size4 measureFolder">
+
+							<input type="text" name="frame" disabled="disabled" id="phFrame" />
+
+							<label for="phFrame">Ph</label>
+						</div>
+
+						<div class="col size4 measureFolder">
+
+							<input type="submit" name="button" value="show"/>
+						</div>
+					</div>
+				</form>
+
+				<form class="measureFolderForm" id="o2">
+
+					<div class="col size4 mainMeasureFolder">	
+
+						<div class="col size4 measureFolder">
+
+							<input type="text" name="frame" disabled="disabled" id="o2Frame"/>
+
+							<label for="o2Frame">mg/L</label>
+						</div>
+
+						<div class="col size4 measureFolder">
+
+							<input type="submit" name="button" value="show"/>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+
+		<div class="linefolder highFrame" id="chartFrame">
+
+			<div class="line">
+				
+				<div class="col size6" id="chart">
+
+					<!--THERE GOES THE GRAPH-->
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

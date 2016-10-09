@@ -1,0 +1,55 @@
+.highFrame {
+
+	margin-top: 20px;
+
+	background-color: rgb(26, 72, 118);
+
+}
+
+	#dataFrame .mainMeasureFolder {
+
+		margin-top: 20px;
+
+		padding: 20px 0px;
+
+		background-color: rgb(26, 72, 118);
+	}
+
+		#dataFrame .measureFolder input[type="text"] {
+
+			margin: 0px 10px;
+
+			text-align: center;
+		}
+
+		#dataFrame .measureFolder input[type="submit"] {
+
+			margin: 20px 0px 0px 10px;
+
+			width: 194px;
+		}
+
+		#dataFrame .measureFolder label {
+
+			color: rgb(255, 255, 255);
+		}
+	#chart {
+
+		background-color: rgb(255, 255, 255);
+
+		height: 200px;
+
+		padding: 0px 10px;
+	}
+
+	.chartData {
+
+		height: 100px;
+
+		margin-top: 100px;
+
+		background-color: rgb(76, 122, 168);
+
+		float: left;
+	}
+
