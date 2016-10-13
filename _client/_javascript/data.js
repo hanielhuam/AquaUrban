@@ -61,12 +61,16 @@ $(function () {
 	class Sensor {
 
 		constructor (pos, bit, readF) {
-		
-			this.pin = mraa.Aio(pos);
 
 			this.bit = bit;
 
-			this.pin.setBit(this.bit)
+			if (pos != 'none') {
+		
+				this.pin = mraa.Aio(pos);
+
+				this.pin.setBit(this.bit);
+			}
+			else this.pin = 'none';
 
 			this.readF = readF;
 		}
@@ -98,6 +102,8 @@ $(function () {
 			this.writeF(this.pins);
 		}
 	}
+
+	var ex = new Actuator ({}, function() {});
 
 	var test = new Actuator({
 
