@@ -1,72 +1,145 @@
 <!DOCTYPE html>
 <html>
+	
 	<head>
-
+		
 		<title>Urban Aquaponics</title>
 
-		<!--BASIC JS/CSS FILES-->
-
-		<link rel="stylesheet" type="text/css" href="../common-grid.css"/>
-
-		<link rel="stylesheet" type="text/css" href="../reset.css"/>
-
-		<link rel="stylesheet" type="text/css" href="../normalize.css"/>
-
-		<link rel="stylesheet" type="text/css" href="_css/head.css"/>
-
-		<script type="text/javascript" src="_javascript/jquery-3.1.0.js"></script>
-
 		<meta charset="utf-8"/>
+
+		<!--STYLES-->
+
+			<!--EXPORTED-->
+
+				<link rel="stylesheet" type="text/css" href="_css/reset.css"/>
+
+				<link rel="stylesheet" type="text/css" href="_css/normalize.css"/>
+
+				<link rel="stylesheet" type="text/css" href="_css/bootstrap.min.css">
+			<!--EXPORTED-->
+
+			<!--MADE-->
+
+				<link rel="stylesheet" type="text/css" href="_css/head.css"/>
+
+				<link rel="stylesheet" type="text/css" href="_css/login.css"/>
+			<!--MADE-->
+		<!--STYLES-->
 	</head>
 
 	<body id="body">
 
-		<header>
+		<!--OBJECTS-->
 
-			<div class="linefolder" id="mainHeader">
-				
-				<div class="line">
-					
-					<div class="col size4" id="mainTitleFolder">
-						
-						<h1 id="mainTitle">Aqua Urban</h1>
-					</div>
+			<div class="container">
 
-					<div class="col size8" id="mainDescriptionFolder">
-						
-						<h2 id="mainDescription">Create your own Production of fish and vegetables</h2>
-					</div>
-				</div>
+				<div class="row" id="high-folder">
 
-				<div class="line" id="menu">
+					<div class="col-md-6 col-md-offset-3" id="main-folder">
 
-					<nav>
+						<div class="row">
 
-						<div class="col size4">
+							<div class="col-md-10 col-md-offset-1" id="header-folder">
+
+								<h1 id="mainTitle">Aqua Urban</h1>
+
+								<h2 id="mainDescription">Create your own production of fish and vegetables</h2>
+							</div>
+
+							<div class="col-md-10 col-md-offset-1">
+
+								<div class="row">
 							
-							<a href="index.html"><p>About Us</p></a>
-						</div>
+									<form id="info">
 
-						<div class="col size4">
+										<template id="field">
 
-							<a href="data.html"><p>System Data</p></a>
-						</div>
+											<div class="col-md-12 field-folder">
 
-						<div class="col size4">
+												<div class="row">
 
-							<a href="settings.html"><p>Settings</p></a>
-						</div>
-					</nav>
+													<div class="col-md-10 col-md-offset-1 label">
+
+														<p><label for="${id}-input">${id}:</label></p>
+													</div>
+
+													<div class="col-md-10 col-md-offset-1 error-folder">
+
+														<p class="error" id="${id}-error"></p>
+													</div>
+
+													<div class="col-md-10 col-md-offset-1 input">
+														
+														<input type="${type}" name="${id}" id="${id}-input"/>
+													</div>
+												</div>
+											</div>
+										</template>
+									</form>
+
+									<div class="col-md-12" id="button">
+
+										<div class="row">
+
+											<button class="col-md-4 col-md-offset-1" id="submit">submit</button>
+
+											<!--<button type="button" data-toggle="modal" data-target="#popup" class="col-md-4 col-md-offset-2" id="create">create account</button>-->
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>	
+					</div>
 				</div>
+
+				<!--<div class="modal" id="popup">
+					
+					<div class="modal-dialog">
+						
+						<div class="modal-content">
+							
+							<div class="modal-header">
+
+								<button class="close" type="button" data-dismiss="modal">&times;</button>
+
+								<h3 class="modal-title">head</p>
+							</div>
+
+							<div class="modal-body">
+								
+								<p>body</p>
+							</div>
+
+							<div class="modal-footer">
+								
+								<button id="create">create</button>
+							</div>
+						</div>
+					</div>
+				</div>-->
 			</div>
-		</header>
+		<!--OBJECTS-->
 
-		<script type="text/javascript">
-			
-			$(function () {
+		<!--SCRIPTS-->
 
-				
-			});
-		</script>
+			<!--EXPORTED-->
+
+				<script type="text/javascript" src="_javascript/jquery-3.1.0.js"></script>
+
+				<script type="text/javascript" src="_javascript/bootstrap.min.js"></script>
+
+				<script type="text/javascript" src="_javascript/jquery.tmpl.js"></script>
+
+				<script type="text/javascript" src="/socket.io/socket.io.js"></script>
+			<!--EXPORTED-->
+
+			<!--MADE-->
+
+
+				<script type="text/javascript" src="_javascript/client.js"></script>
+
+				<script type="text/javascript" src="_javascript/login.js"></script>
+			<!--MADE-->
+		<!--SCRIPTS-->
 	</body>
 </html>

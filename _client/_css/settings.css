@@ -1,0 +1,38 @@
+#alert-log-frame {
+
+	background-color: rgb(255, 255, 255);
+}
+
+#alert-log-button-frame {
+
+	background-color: rgb(76, 122, 168);
+
+	padding: 10px 0px;
+}
+
+.setting-frame {
+
+	background-color: rgb(76, 122, 168);
+
+	margin-bottom: 10px;
+
+	padding: 10px 0px;
+}
+
+.setting-label-frame {
+
+	background-color: rgb(0, 0, 0);
+
+	height: 30px;
+
+	margin-bottom: 10px;
+}
+
+.setting-label {
+
+	text-align: center;
+
+	font-size: 20px;
+
+	color: rgb(255, 255, 255);
+}

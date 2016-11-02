@@ -1,216 +1,387 @@
 $(function () {
 
-	var mraa = {
+	//DATA FRAME INSTRUCTIONS:
 
-		Aio: function (pos) {
+		$.template('data', $('#data').html());
 
-			var aio = {
+		window.dataSet = new DataSet('#data-form');
 
-				pin: pos,
+		dataSet.addData({id: 'temperature', measure: 'Cº'});
 
-				bit: 10,
+		dataSet.addData({id: 'acidness', measure: 'PH'});
 
-				setBit: function (bit) {
+		dataSet.addData({id: 'water-level', measure: 'cm'});
+	//CHART INSTRUCTIONS:
 
-					aio.bit = bit;
-				},
+		//CHART VIEWER:
 
-				read: function () {
+			window.$chart = $('#chart');
 
-					return Math.pow(2, aio.bit);
-				},
+			$chart.parent().css({
 
-				print: function () {
+				backgroundColor: "rgb(255, 255, 255)"
+			});
 
-					console.log('aio: { pin: ' + aio.pin + '; bit: ' + aio.bit + '; read(): ' + aio.read() + '};');
+			var line1Color = "rgba(0, 0, 0, 0.9)";
+
+			window.chart = new DataChart({
+				
+				data: {
+				    
+				    datasets: [
+				        
+				        {
+				            label: 'temperature',
+				            
+				            data: [0, 0, 0, 0, 0],
+
+				            tension: 0,
+
+				            fill: false
+				        },
+
+				        {
+				            label: 'ph',
+				            
+				            data: [0, 0, 0, 0, 0],
+
+				            tension: 0,
+
+				            fill: false
+				        },
+
+				        {
+				            label: 'water-level',
+				            
+				            data: [0, 0, 0, 0, 0],
+
+				            tension: 0,
+
+				            fill: false
+				        }
+				    ]
 				}
-			};
+			});
 
-			//console.log('aio: { pin: ' + aio.pin + '; bit: ' + aio.bit + '; read(): ' + aio.read() + '};');
+			chart.isUpdating = true;
 
-			return aio;
-		},
+			requestAllRecent();
 
-		Gpio: function (pos) {
+			 for (var index in chart.chart.data.datasets) {
 
-			var gpio = {
+				requestRecent(index);
+			}
 
-				pin: pos,
+			setInterval(
 
-				direction: mraa.DIR_OUT,
+				function () {
 
-				dir: function (dir) {
+					for (var index in chart.chart.data.datasets) {
 
-					gpio.direction = dir;
-
-					console.log('new dir: ' + dir);
+						requestRecent(index);
+					}
 				},
 
-				write: function (value) {
+				timeConvert()
+			);
 
-					console.log('writing ' + value + ' value');
-				}
-			}
+		//CHART SETTINGS:
 
-			return gpio;
-		},
+			window.$searcher = $('#search');
 
-		DIR_OUT: "DIR_OUT"
-	};
+			window.$updater = $('#update');
 
-	class Sensor {
+			window.$settings = $('#settings');
 
-		constructor (pos, bit, readF) {
+			window.$dataDownloader = $('#download');
 
-			this.bit = bit;
+			$.template('date', $('#date-form').html());
 
-			if (pos != 'none') {
-		
-				this.pin = mraa.Aio(pos);
+			window.chartSettings = new ChartSetting('#settings');
 
-				this.pin.setBit(this.bit);
-			}
-			else this.pin = 'none';
+			chartSettings.addField({id : 'start'});
 
-			this.readF = readF;
-		}
+			chartSettings.addField({id : 'end'});
 
-		read () {
+			$searcher.on('click', function () {
 
-			return this.readF(this.pin, this.bit);
-		}
-	}
+				$settings.submit();
+			});
 
-	class Actuator {
+			$updater.on('click', function () {
 
-		constructor (pins, writeF) {
+				$('#start-error').html('');
 
-			this.pins = pins;
+				$('#end-error').html('');
 
-			var i;
+				requestAllRecent();
 
-			for (i in this.pins) {
+				chart.isUpdating = true;
+			});
 
-				this.pins[i].dir(mraa.DIR_OUT);
-			}
+			$settings.on('submit', function (e) {
 
-			this.writeF = writeF;
-		}
+				e.preventDefault();
 
-		write () {
+				var searchedData = settingsCheck(chartSettings.getData());
 
-			this.writeF(this.pins);
-		}
-	}
+				chart.isUpdating = !searchedData.success;
+			});
 
-	var ex = new Actuator ({}, function() {});
+			$dataDownloader.on('click', function () {
 
-	var test = new Actuator({
+				var blob = new Blob(getDataString(chart), {type: "text/plain;charset=utf-8"});
 
-			step: new mraa.Gpio(5),
-
-			dir: new mraa.Gpio(4),
-
-			tmp: new mraa.Gpio(3)
-		},
-
-		function (pins) {
-
-			pins.step.write(0);
-		}
-	);
-
-	test.write();
-
-	var inTest = new Sensor(0, 10, function(pin, bit) {
-
-		//console.log(pin.read());
-
-		return (pin.read() / Math.pow(2, bit)) * 200;
-	});
-
-	console.log(inTest.read());
+				saveAs(blob, 'chart-data.txt');
+			});
 });
 
-//DATA CLASS:
+//TIME FUNCTIONS AND VARIABLES:
 
-	class Data {
+	function timeConvert (qnt, inMeasureType, outMeasureType) {
 
-		constructor (dataFrame) {
+		qnt = def(qnt, 60);
 
-			this.$frame = dataFrame;
+		inMeasureType = def(inMeasureType, 'seconds');
+
+		outMeasureType = def(outMeasureType, 'milliseconds');
+
+		this.millis = function (measureType) {
+
+			switch (measureType) {
+
+				case 'milliseconds':
+
+					return 1;
+				case 'seconds':
+
+					return 1000;
+				case 'minutes':
+
+					return 60000;
+				case 'hours':
+
+					return 3600000;
+				case 'days':
+
+					return 86400000;
+				case 'weeks':
+
+					return 604800000;
+			}
 		}
 
-		setData (value) {
+		return (qnt * this.millis(inMeasureType) / this.millis(outMeasureType));
+	};
 
-			this.$frame.css({
+//DATA FUNCTIONS AND CLASSES:
 
-				marginTop: 200 - value,
+	var DataSet = function (id) {
 
-				height: value
-			});
-		}
-	}
+		this.data = {};
 
-//CHART CLASS:
+		this.body = $(id);
 
-	$('#chart').css({
+		this.addData = function (data) {
 
-		paddingRight: 0,
+			this.data[data.id] = new Data(data, this.body);
+		};
 
-		paddingLeft: 0
-	});
+		this.pushData = function (data, n) {
 
-	class Chart {
+			var index;
 
-		constructor (len) {
+			for (var catcher in this.data) {
 
-			this.$chart = $('#chart');
+				n--;
 
-			this.array = [];
+				if (n <= 0) {
 
-			this.len = len;
+					index = catcher;
 
-			this.dataWidth = (480 / (len * 2));
-
-			while (len > 0) {
-
-				this.$chart.append('<div class="chartData"></div>');
-
-				this.array.push(new Data(this.$chart.find('.chartData').last()));
-
-				len--;
+					break;
+				}
 			}
 
-			this.$chart.find('.chartData').css({
 
-				width: this.dataWidth,
+			this.data[index].input.val(data);
+		};
+	}
+
+	var Data = function (data, frame) {
+
+		$.tmpl('data', data).appendTo(frame);
+
+		this.input = $('#' + data.id);
+
+		this.id = data.id;
+	}
+
+//CHART FUNCTIONS AND CLASSES:
+
+	//CHART VIEWER:
+
+		var DataChart = function (param, canvasFrame) {
+
+			this.chart = new Chart(
 				
-				marginLeft: this.dataWidth / 2,
+				def(canvasFrame, $chart),
 
-				marginRight: this.dataWidth / 2
-			});
-		}
+				sonSet(param, defSet)
+			);
 
-		setData (index, value) {
+			this.pushLabelCycle = 3;
 
-			if (index >= this.len || index < 0 || value < 0 || value > 200) return false;
+			this.pushLabelStage = -3;
 
-			this.array[index].setData(value);
+			this.pushRecent = function (newData, index, date) {
 
-			return true;
-		}
+				index = def(index, 0);
 
-		delete () {
+				newData = def(newData, this.chart.data.datasets[index].data[this.chart.data.datasets[index].data.length - 1]);
 
-			while (this.len > 0) {
+				if (this.pushLabelStage == 0) {
 
-				this.array[(this.len - 1)].$frame.remove();
+					this.chart.data.labels.shift();
 
-				this.len--;
+					this.chart.data.labels.push(stdDateString(new Date()));
+				}
+
+				this.pushLabelStage = (this.pushLabelStage + 1) % this.pushLabelCycle;
+
+				this.chart.data.datasets[index].data.shift();
+
+				this.chart.data.datasets[index].data.push(newData);
+
+				this.chart.update();
+			};
+
+			this.isUpdating = true;
+
+			this.setAll = function (newData, newLabel) {
+
+				this.pushLabelStage = -3;
+				
+				var newDataSet = [];
+
+				for (var index in newData) {
+
+					newDataSet.push(sonSet(newData[index], this.chart.data.datasets[index]));
+				}
+
+				this.chart.data.datasets = newDataSet;
+
+				this.chart.data.labels = newLabel;
+
+				this.chart.update();
+			}
+		};
+
+		var defSet = {
+
+			type: 'line',
+
+			options: {
+
+				scales: {
+
+					yAxes: [{
+
+						ticks: {
+
+							beginAtZero: true
+						}
+					}]
+				}
+			},
+
+			data: {
+
+				labels: updatedTime.array()
+			}
+		};
+	//CHART SETTINGS:
+
+		var ChartSetting = function (id) {
+
+			this.body = $(id);
+
+			this.fields = {};
+
+			this.addField = function (data) {
+
+				this.fields[data.id] = new FormData(data, this.body);
+			}
+
+			this.getData = function () {
+
+				var data = {};
+
+				for (var index0 in this.fields) {
+
+					for (var index1 in this.fields[index0].data) {
+
+						data[index0 + index1] = this.fields[index0].data[index1].val();
+					}
+				}
+
+				return data;
 			}
 		}
+
+		var FormData = function (data, frame) {
+
+			$.tmpl('date', data).appendTo(frame);
+
+			this.data = {
+
+				Year: $('[name = "' + data.id + 'Year"]'),
+
+				Month: $('[name = "' + data.id + 'Month"]'),
+
+				Day: $('[name = "' + data.id + 'Day"]'),
+
+				Hour: $('[name = "' + data.id + 'Hour"]'),
+
+				Minute: $('[name = "' + data.id + 'Minute"]')
+			};
+		}
+
+		function getDataString (currentChart) {
+
+			var file = [];
+
+			var line;
+
+			for (var index in currentChart.chart.data.labels) {
+
+				line = String(currentChart.chart.data.labels[index]);
+
+				line = line.concat(' { ');
+
+				for (var datasets in currentChart.chart.data.datasets) {
+
+					line = line.concat(currentChart.chart.data.datasets[datasets].label + ': ' + currentChart.chart.data.datasets[datasets].data[index] + ', ');
+				}
+
+				line = line.concat('};\n');
+
+				file.push(line);
+			}
+
+			return file;
+		}
+//COMMUNICATION FUNCTIONS:
+
+	function update (data, index, date) {
+
+		if (chart.isUpdating) chart.pushRecent(data, parseInt(index), date);
+
+		dataSet.pushData(data, parseInt(index) + 1);
 	}
 
-	
+	function updateAll (data) {
+
+		chart.setAll(data.datasets, data.labels);
+	}
 //END OF FILE;

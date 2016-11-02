@@ -1,0 +1,49 @@
+#body {
+
+	background-color: rgb(255, 255, 255)
+}
+
+#main-folder {
+
+	margin-top: 60px;
+
+	margin-bottom: 60px;
+
+	padding: 50px 20px;
+
+	background-color: rgb(26, 72, 118);
+}	
+	
+	#header-folder {
+
+		background-color: rgb(76, 122, 168);
+	}
+
+	.field-folder, #button {
+
+		background-color: rgb(0, 0, 0);
+
+		padding: 30px 10px;
+
+		margin: 10px 0px;
+	}
+
+		.label label {
+
+			font-size: 15px;
+		}
+
+		.label p {
+
+			text-align: left;
+		}
+
+		.error-folder {
+
+			width: 10px;
+		}
+
+			.error {
+
+				color: rgb(255, 0, 0);
+			}

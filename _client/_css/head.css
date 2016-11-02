@@ -1,74 +1,99 @@
 #body {
 
-	background-color: rgb(76, 122, 168);
+	background-color: rgb(0, 100, 155);
 
 	font-family: "Times New Roman";
 }
 
-#mainHeader {
 
-	background-color: rgb(26, 72, 118);
-}
+/*HEADER*/
 
-	#mainHeader .col {
+	#mainHeader {
 
-		background-color: rgb(255, 255, 255);
+		background-color: rgb(26, 72, 118);
 	}
 
-	#mainHeader #mainTitle {
+		#mainHeader .col {
 
-		font-size: 50px;
+			background-color: rgb(255, 255, 255);
+		}
 
-		color: rgb(255, 255, 255);
+		#mainTitle {
 
-		text-align: center;
-	}
+			font-size: 50px;
 
-	#mainHeader #mainTitleFolder {
+			color: rgb(255, 255, 255);
 
-		height: 120px;
+			text-align: center;
+		}
 
-		background-color: rgb(0, 0, 0);
-	}
+		#mainHeader #mainTitleFolder {
 
-	#mainHeader #mainDescription {
-
-		padding: 50px 0px;
-
-		font-size: 30px;
-
-		color: rgb(0, 0, 0);
-
-		text-align: center;
-	}
-
-	#mainHeader #mainDescriptionFolder {
-
-		height: 120px;
-
-		background-image: url(../_media-source/main-description-folder.jpg);
-	}
-
-	#mainHeader #menu {
-
-		background-color: rgb(0, 0, 0);
-	}
-
-		#mainHeader #menu div{
+			height: 120px;
 
 			background-color: rgb(0, 0, 0);
 		}
 
-		#mainHeader #menu a {
+		#mainDescription {
 
-			text-decoration: none;
-		}
+			padding: 50px 0px;
 
-		#mainHeader #menu p {
+			font-size: 30px;
 
-			color: rgb(255, 255, 255);
-
-			font-size: 20px;
+			color: rgb(0, 0, 0);
 
 			text-align: center;
 		}
+
+		#mainHeader #mainDescriptionFolder {
+
+			height: 120px;
+
+			background-image: url(../_media-source/main-description-folder.jpg);
+		}
+
+		#mainHeader #menu {
+
+			background-color: rgb(0, 0, 0);
+		}
+
+			#mainHeader #menu div{
+
+				background-color: rgb(0, 0, 0);
+			}
+
+			#mainHeader #menu a {
+
+				text-decoration: none;
+			}
+
+			#mainHeader #menu p {
+
+				color: rgb(255, 255, 255);
+
+				font-size: 20px;
+
+				text-align: center;
+			}
+
+.high-frame {
+
+	margin-top: 20px;
+
+	padding: 40px;
+
+	background-color: rgb(26, 72, 118);
+
+}
+
+button, input[type="submit"] {
+
+	background-color: black;
+
+	color: white;
+}
+
+.container {
+
+	margin-bottom: 40px;
+}

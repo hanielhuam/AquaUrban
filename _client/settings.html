@@ -1,70 +1,221 @@
 <!DOCTYPE html>
 <html>
+
 	<head>
 
 		<title>Urban Aquaponics</title>
 
-		<!--BASIC JS/CSS FILES-->
-
-		<link rel="stylesheet" type="text/css" href="../common-grid.css"/>
-
-		<link rel="stylesheet" type="text/css" href="../reset.css"/>
-
-		<link rel="stylesheet" type="text/css" href="../normalize.css"/>
-
-		<link rel="stylesheet" type="text/css" href="_css/head.css"/>
-
-		<script type="text/javascript" src="_javascript/jquery-3.1.0.js"></script>
-
 		<meta charset="utf-8"/>
+
+		<!--STYLES-->
+
+			<!--EXPORTED-->
+
+				<link rel="stylesheet" type="text/css" href="_css/reset.css"/>
+
+				<link rel="stylesheet" type="text/css" href="_css/normalize.css"/>
+
+				<link rel="stylesheet" type="text/css" href="_css/bootstrap.min.css">
+			<!--EXPORTED-->
+
+			<!--MADE-->
+
+				<link rel="stylesheet" type="text/css" href="_css/head.css"/>
+
+				<link rel="stylesheet" type="text/css" href="_css/settings.css"/>
+			<!--MADE-->
+		<!--STYLES-->
 	</head>
 
 	<body id="body">
 
-		<header>
+		<!--OBJECTS-->
 
-			<div class="linefolder" id="mainHeader">
-				
-				<div class="line">
-					
-					<div class="col size4" id="mainTitleFolder">
+			<div class="container">
+
+				<header>
+
+					<div id="mainHeader">
 						
-						<h1 id="mainTitle">Aqua Urban</h1>
+						<div class="row">
+							
+							<div class="col-md-4" id="mainTitleFolder">
+								
+								<h1 id="mainTitle">Aqua Urban</h1>
+							</div>
+
+							<div class="col-md-8" id="mainDescriptionFolder">
+								
+								<h2 id="mainDescription">Create your own production of fish and vegetables</h2>
+							</div>
+						</div>
+
+						<div class="row" id="menu">
+
+							<nav>
+
+								<div class="col-md-4">
+									
+									<a href="home.html"><p>About Us</p></a>
+								</div>
+
+								<div class="col-md-4">
+
+									<a href="data.html"><p>System Data</p></a>
+								</div>
+
+								<div class="col-md-4">
+
+									<a href="settings.html"><p>Settings</p></a>
+								</div>
+							</nav>
+						</div>
 					</div>
+				</header>
 
-					<div class="col size8" id="mainDescriptionFolder">
+				<!--SETTINGS-->
+				<div class="high-frame">
+					
+					<div class="row" id="settings-outter-frame">
+
+						<template id="setting-template-1">
+							
+							<div class="col-md-12 setting-frame">
+
+								<div class="row">
+
+									<div class="col-md-12">
+
+										<div class="row">
+											
+											<div class="col-md-4 col-md-offset-4 setting-label-frame">
+
+												<p class="setting-label" id="${id}-label">${id} settings:</p>
+											</div>
+										</div>
+									</div>
+								
+									<form class="setting-form" id="${id}-form">
+
+										<div class="col-md-12">
+											
+											<div class="row">
+												
+												${extra}
+											</div>
+										</div>
+										
+										<input type="submit" name="act" value="${message} ${messageComplement}" class="col-md-4 col-md-offset-4"/>
+									</form>
+								</div>
+							</div>
+						</template>
 						
-						<h2 id="mainDescription">Create your own Production of fish and vegetables</h2>
+						<template id="setting-template-2">
+							
+							<div class="col-md-12 setting-frame">
+
+								<div class="row">
+
+									<div class="col-md-12">
+
+										<div class="row">
+											
+											<div class="col-md-4 col-md-offset-4 setting-label-frame">
+
+												<p class="setting-label" id="${id}-label">${id} settings:</p>
+											</div>
+										</div>
+									</div>
+								
+									<form class="setting-form" id="${id}-form">
+
+										<div class="col-md-12">
+											
+											<div class="row">
+												
+												${extra}
+											</div>
+										</div>
+											
+										<input type="submit" name="increase" value="increase ${id}" class="col-md-2 col-md-offset-4"/>
+
+										<input type="submit" name="decrease" value="decrease ${id}" class="col-md-2"/>
+									</form>
+								</div>
+							</div>
+						</template>
 					</div>
 				</div>
 
-				<div class="line" id="menu">
+				<!--ALERT LOG-->
+				<div class="high-frame">
 
-					<nav>
+					<div class="row">
 
-						<div class="col size4">
+						<div class="col-md-12" id="alert-log-button-frame">
+
+							<div class="row">
+								
+								<button class="col-xs-4 col-xs-offset-1" id="download">download data</button>
+
+								<button class="col-xs-4 col-xs-offset-2" id="clear">clear log</button>
+							</div>
+						</div>
+						
+						<div class="col-md-12" id="alert-log-frame">
 							
-							<a href="index.html"><p>About Us</p></a>
+							<div class="row" id="alert-log">
+								
+								<template id="alert">
+									
+									<div class="col-md-12" id="alert-${n}">
+										
+										<div class="row">
+											
+											<div class="col-md-3">
+												
+												<p id="alert-date-${n}">${date}:</p>
+											</div>
+
+											<div class="col-md-8">
+												
+												<p id="alert-message-${n}">${message}</p>
+											</div>
+
+											<div class="col-md-1">
+												
+												<button type="button" class="close" id="close-button-${n}">&times;</button>
+											</div>
+										</div>
+									</div>
+								</template>
+							</div>
 						</div>
-
-						<div class="col size4">
-
-							<a href="data.html"><p>System Data</p></a>
-						</div>
-
-						<div class="col size4">
-
-							<a href="settings.html"><p>Settings</p></a>
-						</div>
-					</nav>
+					</div>
 				</div>
 			</div>
-		</header>
+		<!--OBJECTS-->
 
-		<script type="text/javascript">
-			
-			$(function () {
-			});
-		</script>
+		<!--SCRIPTS-->
+
+			<!--EXPORTED-->
+
+				<script type="text/javascript" src="_javascript/jquery-3.1.0.js"></script>
+
+				<script type="text/javascript" src="_javascript/jquery.tmpl.js"></script>
+
+				<script type="text/javascript" src="_javascript/FileSaver.js"></script>
+
+				<script type="text/javascript" src="/socket.io/socket.io.js"></script>
+			<!--EXPORTED-->
+
+			<!--MADE-->
+
+				<script type="text/javascript" src="_javascript/client.js"></script>
+
+				<script type="text/javascript" src="_javascript/settings.js"></script>
+			<!--MADE-->
+		<!--SCRIPTS-->
 	</body>
 </html>

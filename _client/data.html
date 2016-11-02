@@ -1,139 +1,218 @@
 <!DOCTYPE html>
 <html>
+
 	<head>
 
 		<title>Urban Aquaponics</title>
 
-		<!--BASIC JS/CSS FILES-->
-
-		<link rel="stylesheet" type="text/css" href="../common-grid.css"/>
-
-		<link rel="stylesheet" type="text/css" href="../reset.css"/>
-
-		<link rel="stylesheet" type="text/css" href="../normalize.css"/>
-
-		<link rel="stylesheet" type="text/css" href="_css/head.css"/>
-
-		<link rel="stylesheet" type="text/css" href="_css/data.css"/>
-
-		<script type="text/javascript" src="_javascript/jquery-3.1.0.js"></script>
-
-		<script type="text/javascript" src="_javascript/data.js"></script>
-
 		<meta charset="utf-8"/>
+
+		<!--STYLES-->
+
+			<!--EXPORTED-->
+
+				<link rel="stylesheet" type="text/css" href="_css/reset.css"/>
+
+				<link rel="stylesheet" type="text/css" href="_css/normalize.css"/>
+
+				<link rel="stylesheet" type="text/css" href="_css/bootstrap.min.css">
+			<!--EXPORTED-->
+
+			<!--MADE-->
+
+				<link rel="stylesheet" type="text/css" href="_css/head.css"/>
+
+				<link rel="stylesheet" type="text/css" href="_css/data.css"/>
+			<!--MADE-->
+		<!--STYLES-->
 	</head>
 
 	<body id="body">
 
-		<header>
+		<!--OBJECTS-->
 
-			<div class="linefolder" id="mainHeader">
-				
-				<div class="line">
-					
-					<div class="col size4" id="mainTitleFolder">
+			<div class="container">
+
+				<header>
+
+					<div id="mainHeader">
 						
-						<h1 id="mainTitle">Aqua Urban</h1>
-					</div>
-
-					<div class="col size8" id="mainDescriptionFolder">
-						
-						<h2 id="mainDescription">Create your own Production of fish and vegetables</h2>
-					</div>
-				</div>
-
-				<div class="line" id="menu">
-
-					<nav>
-
-						<div class="col size4">
+						<div class="row">
 							
-							<a href="index.html"><p>About Us</p></a>
+							<div class="col-md-4" id="mainTitleFolder">
+								
+								<h1 id="mainTitle">Aqua Urban</h1>
+							</div>
+
+							<div class="col-md-8" id="mainDescriptionFolder">
+								
+								<h2 id="mainDescription">Create your own production of fish and vegetables</h2>
+							</div>
 						</div>
 
-						<div class="col size4">
+						<div class="row" id="menu">
 
-							<a href="data.html"><p>System Data</p></a>
+							<nav>
+
+								<div class="col-md-4">
+									
+									<a href="home.html"><p>About Us</p></a>
+								</div>
+
+								<div class="col-md-4">
+
+									<a href="data.html"><p>System Data</p></a>
+								</div>
+
+								<div class="col-md-4">
+
+									<a href="settings.html"><p>Settings</p></a>
+								</div>
+							</nav>
+						</div>
+					</div>
+				</header>
+
+				<!--RECENT DATA-->
+				<div class="high-frame">
+
+					<div class="row">
+
+						<form id="data-form">
+							
+							<template id="data">
+
+								<div class="col-md-4 data-frame">
+
+									<div class="row">
+
+										<div class="col-md-10 data-measure-frame">
+										
+											<p class="measure"><label for="${id}">${id}:</label></p>
+										</div>
+									</div>
+
+									<div class="row inner-data-frame">
+
+										<div class="col-md-8">
+
+											<div class="row">
+											
+												<input type="text" name="${id}" disabled="disabled" class="col-md-10 col-md-offset-2" id="${id}"/>
+											</div>
+										</div>
+
+										<div class="col-md-4">
+
+											<p>${measure}</p>
+										</div>
+									</div>
+								</div>
+							</template>
+						</form>
+					</div>
+				</div>
+
+				<!--CHART-->
+				<div class="high-frame">
+
+					<div class="row">
+
+						<div class="col-md-8">
+							
+							<canvas id="chart"></canvas>
 						</div>
 
-						<div class="col size4">
+						<div class="col-md-4" id="chart-settings">
 
-							<a href="settings.html"><p>Settings</p></a>
+							<div class="row">
+
+								<div class="col-md-10 col-md-offset-1">
+
+									<div class="row">
+									
+										<form id="settings">
+
+											<template id="date-form">
+
+												<div class="label-frame col-md-12">
+											
+													<p class="date-label">${id} date:</p>
+												</div>
+
+												<div class="error-frame col-md-12">
+
+													<p class="error-message" id="${id}-error"></p>
+												</div>
+
+												<div class="col-md-12 setting-frame">
+													
+													<div class="row">
+
+														<p class="col-md-3 syntax">y/m/a:</p>
+														
+														<input type="text" name="${id}Year" class="col-md-3">
+
+														<input type="text" name="${id}Month" class="col-md-3">
+
+														<input type="text" name="${id}Day" class="col-md-3">
+													</div>
+												</div>
+
+												<div class="col-md-12 setting-frame">
+													
+													<div class="row">
+
+														<p class="col-md-3 syntax">hrs:</p>
+												
+														<input type="text" name="${id}Hour" class="col-md-3">
+
+														<p class="col-md-3 syntax">mins:</p>
+
+														<input type="text" name="${id}Minute" class="col-md-3">
+													</div>
+												</div>
+											</template>
+										</form>
+									</div>
+								</div>
+							</div>
 						</div>
-					</nav>
+					</div>
+
+					<div class="row" id="button">
+										
+						<input type="submit" value="search past" class="col-xs-4 button" id="search">
+
+						<input type="submit" value="show recent" class="col-xs-4 button" id="update"/>
+
+						<button class="col-xs-4 button" id="download">download data</button>
+					</div>
 				</div>
 			</div>
-		</header>
+		<!--OBJECTS-->
 
-		<div class="linefolder highFrame" id="dataFrame">
+		<!--SCRIPTS-->
 
-			<div class="line">
+			<!--EXPORTED-->
 
-				<form class="measureFolderForm" id="temperature">
-				
-					<div class="col size4 mainMeasureFolder">	
+				<script type="text/javascript" src="_javascript/jquery-3.1.0.js"></script>
 
-						<div class="col size4 measureFolder">
+				<script type="text/javascript" src="_javascript/jquery.tmpl.js"></script>
 
-							<input type="text" name="frame" disabled="disabled" id="temperatureFrame"/>
+				<script type="text/javascript" src="_javascript/Chart.js"></script>
 
-							<label for="temperatureFrame">Cº</label>
-						</div>
+				<script type="text/javascript" src="_javascript/FileSaver.js"></script>
 
-						<div class="col size4 measureFolder">
+				<script type="text/javascript" src="/socket.io/socket.io.js"></script>
+			<!--EXPORTED-->
 
-							<input type="submit" name="button" value="show"/>
-						</div>
-					</div>
-				</form>
+			<!--MADE-->
 
-				<form class="measureFolderForm" id="ph">
+				<script type="text/javascript" src="_javascript/client.js"></script>
 
-					<div class="col size4 mainMeasureFolder">	
-
-						<div class="col size4 measureFolder">
-
-							<input type="text" name="frame" disabled="disabled" id="phFrame" />
-
-							<label for="phFrame">Ph</label>
-						</div>
-
-						<div class="col size4 measureFolder">
-
-							<input type="submit" name="button" value="show"/>
-						</div>
-					</div>
-				</form>
-
-				<form class="measureFolderForm" id="o2">
-
-					<div class="col size4 mainMeasureFolder">	
-
-						<div class="col size4 measureFolder">
-
-							<input type="text" name="frame" disabled="disabled" id="o2Frame"/>
-
-							<label for="o2Frame">mg/L</label>
-						</div>
-
-						<div class="col size4 measureFolder">
-
-							<input type="submit" name="button" value="show"/>
-						</div>
-					</div>
-				</form>
-			</div>
-		</div>
-
-		<div class="linefolder highFrame" id="chartFrame">
-
-			<div class="line">
-				
-				<div class="col size6" id="chart">
-
-					<!--THERE GOES THE GRAPH-->
-				</div>
-			</div>
-		</div>
+				<script type="text/javascript" src="_javascript/data.js"></script>
+			<!--MADE-->
+		<!--SCRIPTS-->
 	</body>
 </html>

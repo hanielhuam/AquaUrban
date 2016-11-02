@@ -3,3 +3,5 @@
 _data
 
 _client/_media-source
+
+node_modules/
